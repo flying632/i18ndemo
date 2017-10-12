@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 id="title" class="mui-title">标题</h1>
+	        
+	</header>
+	<div class="mui-content">
+	        <button id="changelanguage"></button>
+	    </div>
+	 <script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="js/jquery.i18n.properties-min-1.0.9.js" ></script>
+	<script>
+		var lang;
+		mui.plusReady(function(){
+			lang = (jQuery.i18n.browserLang().substring(0,2));
+			console.log(lang);
+			ready();
+		})
+		function ready(){
+			jQuery.i18n.properties({
+				name:'strings',
+				path:'i18n/',
+				mode:'map',
+				language:lang,
+				callback:function(){
+					$('#title').html($.i18n.prop('title'));
+					$('#changelanguage').html($.i18n.prop('change'));
+				}
+			});
+		}
+		document.getElementById('changelanguage').addEventListener('tap',function(){
+			if('zh'==lang){
+				lang = 'en';
+			}else{
+				lang = 'zh';
+			}
+			ready();
+			
+		})
+	</script>
+</body>
+</html>
